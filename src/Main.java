@@ -1,4 +1,6 @@
+import calculator.Calculate;
 import io.InputHandler;
+import io.Output;
 import operator.Operator;
 import operator.OperatorHandler;
 
@@ -14,6 +16,8 @@ public class Main {
         String replaceSeparatorToOperator = operator.replaceSeparatorToOperator(input);
         List<Double> numbers = operator.extractStringToDouble(input);
 
+        double result = Calculate.getResult(numbers,operator);
+        Output.getCalculateResult(result,replaceSeparatorToOperator);
     }
 
 }
