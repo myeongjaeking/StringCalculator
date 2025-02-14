@@ -19,7 +19,7 @@ public class PlusOperation implements Operator {
     }
 
     @Override
-    public List<Double> extractStringToDouble(String input) {
+    public List<Double> extractNumbers(String input) {
         String[] numberString = replaceSeparatorToOperator(input).split("\\+");
         List<Double> numbers = new ArrayList<>();
 

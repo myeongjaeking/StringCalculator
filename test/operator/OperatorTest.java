@@ -136,7 +136,7 @@ public class OperatorTest {
         Operator actualOperator = new OperatorHandler(input).getOperator();
 
         List<Double> expectNumbers = List.of(1.0, 2.0, 3.0);
-        List<Double> actualNumbers = actualOperator.extractStringToDouble(input);
+        List<Double> actualNumbers = actualOperator.extractNumbers(input);
 
         Assertions.assertEquals(expectNumbers, actualNumbers);
     }
@@ -151,7 +151,7 @@ public class OperatorTest {
         Operator actualOperator = new OperatorHandler(input).getOperator();
 
         List<Double> expectNumbers = List.of(1.0, 2.0, 3.0);
-        List<Double> actualNumbers = actualOperator.extractStringToDouble(input);
+        List<Double> actualNumbers = actualOperator.extractNumbers(input);
 
         Assertions.assertEquals(expectNumbers, actualNumbers);
     }
@@ -166,7 +166,7 @@ public class OperatorTest {
         Operator actualOperator = new OperatorHandler(input).getOperator();
 
         List<Double> expectNumbers = List.of(1.0, 2.0, 3.0);
-        List<Double> actualNumbers = actualOperator.extractStringToDouble(input);
+        List<Double> actualNumbers = actualOperator.extractNumbers(input);
 
         Assertions.assertEquals(expectNumbers, actualNumbers);
     }
@@ -181,7 +181,7 @@ public class OperatorTest {
         Operator actualOperator = new OperatorHandler(input).getOperator();
 
         List<Double> expectNumbers = List.of(1.0, 2.0, 3.0);
-        List<Double> actualNumbers = actualOperator.extractStringToDouble(input);
+        List<Double> actualNumbers = actualOperator.extractNumbers(input);
 
         Assertions.assertEquals(expectNumbers, actualNumbers);
     }

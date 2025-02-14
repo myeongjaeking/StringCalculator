@@ -14,7 +14,7 @@ public class Main {
 
         Operator operator = new OperatorHandler(input).getOperator();
         String replaceSeparatorToOperator = operator.replaceSeparatorToOperator(input);
-        List<Double> numbers = operator.extractStringToDouble(input);
+        List<Double> numbers = operator.extractNumbers(input);
 
         double result = Calculate.getResult(numbers,operator);
         Output.getCalculateResult(result,replaceSeparatorToOperator);

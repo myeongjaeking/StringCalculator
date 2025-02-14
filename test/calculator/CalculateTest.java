@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static exception.ErrorMessage.CANNOT_DIVIDE_BY_ZERO;
-import static org.junit.jupiter.api.Assertions.*;
 
 class CalculateTest {
 
@@ -18,7 +17,7 @@ class CalculateTest {
     void getPlusResult() {
         String input = "1,2,3 +";
         Operator operator = new OperatorHandler(input).getOperator();
-        List<Double> numbers = operator.extractStringToDouble(input);
+        List<Double> numbers = operator.extractNumbers(input);
 
         double expectResult = 6.0;
         double actualResult = Calculate.getResult(numbers, operator);
@@ -31,7 +30,7 @@ class CalculateTest {
     void getMinusResult() {
         String input = "1,2,3 -";
         Operator operator = new OperatorHandler(input).getOperator();
-        List<Double> numbers = operator.extractStringToDouble(input);
+        List<Double> numbers = operator.extractNumbers(input);
 
         double expectResult = -4.0;
         double actualResult = Calculate.getResult(numbers, operator);
@@ -44,7 +43,7 @@ class CalculateTest {
     void getMultiplyResult() {
         String input = "1,2,3 *";
         Operator operator = new OperatorHandler(input).getOperator();
-        List<Double> numbers = operator.extractStringToDouble(input);
+        List<Double> numbers = operator.extractNumbers(input);
 
         double expectResult = 6.0;
         double actualResult = Calculate.getResult(numbers, operator);
@@ -57,7 +56,7 @@ class CalculateTest {
     void getDivideResult() {
         String input = "1,2,3 /";
         Operator operator = new OperatorHandler(input).getOperator();
-        List<Double> numbers = operator.extractStringToDouble(input);
+        List<Double> numbers = operator.extractNumbers(input);
 
         double expectResult = 0.16666666666666666;
         double actualResult = Calculate.getResult(numbers, operator);
@@ -70,7 +69,7 @@ class CalculateTest {
     void getValidDivideResult() {
         String input = "1,0,3 /";
         Operator operator = new OperatorHandler(input).getOperator();
-        List<Double> numbers = operator.extractStringToDouble(input);
+        List<Double> numbers = operator.extractNumbers(input);
 
         IllegalArgumentException exception = Assertions.assertThrows(IllegalArgumentException.class, () ->
                 Calculate.getResult(numbers, operator));
