@@ -1,5 +1,7 @@
 package operator;
 
+import validation.OperatorValidation;
+
 import static exception.ErrorMessage.INPUT_EMPTY_OPERATOR;
 import static exception.ErrorMessage.SEPARATOR_NOT_FOUND;
 
@@ -10,33 +12,12 @@ public class OperatorHandler {
 
     public OperatorHandler(String input) {
         this.input = input;
-        getOperatorChar();
-        validateOperator();
+        this.operator = getOperatorChar();
+        OperatorValidation.validateOperator(input, operator);
     }
 
-    private void isOperator() {
-        boolean isValidOperator = operator == '+' || operator == '-' || operator == '*' || operator == '/';
-
-        if (!isValidOperator) {
-            throw new IllegalArgumentException(INPUT_EMPTY_OPERATOR.getMessage());
-        }
-    }
-
-    private void isInputContainOperator() {
-        String inputContainOperator = input.substring(0, input.length() - 1);
-
-        if (inputContainOperator.contains(String.valueOf(operator))) {
-            throw new IllegalArgumentException(SEPARATOR_NOT_FOUND.getMessage());
-        }
-    }
-
-    private void validateOperator() {
-        isInputContainOperator();
-        isOperator();
-    }
-
-    private void getOperatorChar() {
-        operator = input.charAt(input.length() - 1);
+    private char getOperatorChar() {
+        return operator = input.charAt(input.length() - 1);
     }
 
     public Operator getOperator() {
