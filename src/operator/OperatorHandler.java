@@ -3,7 +3,6 @@ package operator;
 import validation.OperatorValidation;
 
 import static exception.ErrorMessage.INPUT_EMPTY_OPERATOR;
-import static exception.ErrorMessage.SEPARATOR_NOT_FOUND;
 
 public class OperatorHandler {
 

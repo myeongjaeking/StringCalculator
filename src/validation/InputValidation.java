@@ -4,20 +4,13 @@ import static exception.ErrorMessage.*;
 
 public class InputValidation {
 
-    private final String input;
-
-    public InputValidation(String input) {
-        this.input = input;
-        validateInput();
-    }
-
-    private void validateNullInput() {
+    private static void validateNullInput(String input) {
         if (input == null || input.isEmpty()) {
             throw new IllegalArgumentException(INPUT_NOT_NULL.getMessage());
         }
     }
 
-    private void validateConsecutiveSeparators() {
+    private static void validateConsecutiveSeparators(String input) {
         int count = 0;
 
         for (int i = 0; i < input.length() - 1; ++i) {
@@ -33,7 +26,7 @@ public class InputValidation {
         }
     }
 
-    private void validateOperatorPrecededBySpace() {
+    private static void validateOperatorPrecededBySpace(String input) {
         boolean isOperatorPrecededBySpace = input.substring(input.length() - 2, input.length() - 1).equals(" ");
 
         if (!isOperatorPrecededBySpace) {
@@ -41,10 +34,10 @@ public class InputValidation {
         }
     }
 
-    public void validateInput() {
-        validateNullInput();
-        validateConsecutiveSeparators();
-        validateOperatorPrecededBySpace();
+    public static void validateInput(String input) {
+        validateNullInput(input);
+        validateConsecutiveSeparators(input);
+        validateOperatorPrecededBySpace(input);
     }
 
 }

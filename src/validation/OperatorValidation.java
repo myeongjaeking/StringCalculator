@@ -1,7 +1,5 @@
 package validation;
 
-import operator.OperatorHandler;
-
 import static exception.ErrorMessage.INPUT_EMPTY_OPERATOR;
 import static exception.ErrorMessage.SEPARATOR_NOT_FOUND;
 
