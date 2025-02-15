@@ -12,13 +12,16 @@ public class InputValidation {
 
     private static void validateConsecutiveSeparators(String input) {
         int count = 0;
-        for (int i = 0; i < input.length(); i++) {
+
+        for (int i = 0; i < input.length() - 1; ++i) {
             char currentChar = input.charAt(i);
+
             if (Character.isDigit(currentChar)) {
                 count = 0;
                 continue;
             }
-            count++;
+
+            ++count;
             if (count == 2) {
                 throw new IllegalArgumentException(CONTINUOUS_SEPARATOR.getMessage());
             }
