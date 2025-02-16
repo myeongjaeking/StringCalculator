@@ -29,7 +29,7 @@ public class InputValidation {
     }
 
     private static void validateOperatorPrecededBySpace(String input) {
-        boolean isOperatorPrecededBySpace = input.substring(input.length() - 2, input.length() - 1).equals(" ");
+        boolean isOperatorPrecededBySpace = input.charAt(input.length() - 2) == ' ';
 
         if (!isOperatorPrecededBySpace) {
             throw new IllegalArgumentException(OPERATOR_MUST_HAVE_PRECEDING_SPACE.getMessage());

@@ -6,7 +6,7 @@ import validation.InputValidation;
 
 public class InputHandler {
 
-    private String input;
+    private final String input;
 
     public InputHandler() {
         this.input = (new Scanner(System.in)).nextLine();

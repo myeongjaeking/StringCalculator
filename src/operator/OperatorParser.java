@@ -10,7 +10,7 @@ import static separator.Separator.REST_SEPARATOR;
 
 public class OperatorParser {
 
-    public static String replaceSeparatorToOperator(String input,String operator) {
+    public static String replaceSeparatorToOperator(String input, String operator) {
         String replacedSeparatorToOperator = input.replace(COLON_SEPARATOR.getSeparator(), operator)
                 .replace(REST_SEPARATOR.getSeparator(), operator);
 
@@ -18,7 +18,7 @@ public class OperatorParser {
     }
 
     public static List<Double> extractNumbers(String input, String operator) {
-        String regularOperator = "\\" + operator;
+        String regularOperator = "\\%s".formatted(operator);
 
         return Arrays.stream(replaceSeparatorToOperator(input, operator).split(regularOperator))
                 .map(String::trim)
