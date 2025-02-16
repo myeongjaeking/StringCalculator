@@ -8,7 +8,7 @@ public class MultiplyOperation implements Operator {
     }
 
     @Override
-    public String getOperator() {
+    public String getOperatorSymbol() {
         return "*";
     }
 

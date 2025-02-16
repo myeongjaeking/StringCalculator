@@ -18,7 +18,7 @@ class CalculateTest {
     void getPlusResult() {
         String input = "1,2,3 +";
         Operator operator = new OperatorHandler(input).getOperator();
-        List<Double> numbers = OperatorParser.extractNumbers(input,operator.getOperator());
+        List<Double> numbers = OperatorParser.extractNumbers(input,operator.getOperatorSymbol());
 
         double expectResult = 6.0;
         double actualResult = Calculate.getResult(numbers, operator);
@@ -31,7 +31,7 @@ class CalculateTest {
     void getMinusResult() {
         String input = "1,2,3 -";
         Operator operator = new OperatorHandler(input).getOperator();
-        List<Double> numbers = OperatorParser.extractNumbers(input,operator.getOperator());
+        List<Double> numbers = OperatorParser.extractNumbers(input,operator.getOperatorSymbol());
 
         double expectResult = -4.0;
         double actualResult = Calculate.getResult(numbers, operator);
@@ -44,7 +44,7 @@ class CalculateTest {
     void getMultiplyResult() {
         String input = "1,2,3 *";
         Operator operator = new OperatorHandler(input).getOperator();
-        List<Double> numbers = OperatorParser.extractNumbers(input,operator.getOperator());
+        List<Double> numbers = OperatorParser.extractNumbers(input,operator.getOperatorSymbol());
 
         double expectResult = 6.0;
         double actualResult = Calculate.getResult(numbers, operator);
@@ -57,7 +57,7 @@ class CalculateTest {
     void getDivideResult() {
         String input = "1,2,3 /";
         Operator operator = new OperatorHandler(input).getOperator();
-        List<Double> numbers = OperatorParser.extractNumbers(input,operator.getOperator());
+        List<Double> numbers = OperatorParser.extractNumbers(input,operator.getOperatorSymbol());
 
         double expectResult = 0.16666666666666666;
         double actualResult = Calculate.getResult(numbers, operator);
@@ -70,7 +70,7 @@ class CalculateTest {
     void getValidDivideResult() {
         String input = "1,0,3 /";
         Operator operator = new OperatorHandler(input).getOperator();
-        List<Double> numbers = OperatorParser.extractNumbers(input,operator.getOperator());
+        List<Double> numbers = OperatorParser.extractNumbers(input,operator.getOperatorSymbol());
 
         IllegalArgumentException exception = Assertions.assertThrows(IllegalArgumentException.class, () ->
                 Calculate.getResult(numbers, operator));

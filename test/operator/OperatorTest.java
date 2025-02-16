@@ -58,8 +58,8 @@ public class OperatorTest {
         Operator expectOperator = new MinusOperation();
         Operator actualOperator = new OperatorHandler(input).getOperator();
 
-        String expectString = OperatorParser.replaceSeparatorToOperator(input,expectOperator.getOperator());
-        String actualString = OperatorParser.replaceSeparatorToOperator(input,actualOperator.getOperator());
+        String expectString = OperatorParser.replaceSeparatorToOperator(input,expectOperator.getOperatorSymbol());
+        String actualString = OperatorParser.replaceSeparatorToOperator(input,actualOperator.getOperatorSymbol());
 
         Assertions.assertEquals(expectString, actualString);
     }
@@ -74,8 +74,8 @@ public class OperatorTest {
         Operator expectOperator = new DivideOperation();
         Operator actualOperator = new OperatorHandler(input).getOperator();
 
-        String expectString = OperatorParser.replaceSeparatorToOperator(input,expectOperator.getOperator());
-        String actualString = OperatorParser.replaceSeparatorToOperator(input,actualOperator.getOperator());
+        String expectString = OperatorParser.replaceSeparatorToOperator(input,expectOperator.getOperatorSymbol());
+        String actualString = OperatorParser.replaceSeparatorToOperator(input,actualOperator.getOperatorSymbol());
 
         Assertions.assertEquals(expectString, actualString);
     }
@@ -90,8 +90,8 @@ public class OperatorTest {
         Operator expectOperator = new MultiplyOperation();
         Operator actualOperator = new OperatorHandler(input).getOperator();
 
-        String expectString = OperatorParser.replaceSeparatorToOperator(input,expectOperator.getOperator());
-        String actualString = OperatorParser.replaceSeparatorToOperator(input,actualOperator.getOperator());
+        String expectString = OperatorParser.replaceSeparatorToOperator(input,expectOperator.getOperatorSymbol());
+        String actualString = OperatorParser.replaceSeparatorToOperator(input,actualOperator.getOperatorSymbol());
 
         Assertions.assertEquals(expectString, actualString);
     }
@@ -134,7 +134,7 @@ public class OperatorTest {
         Operator actualOperator = new OperatorHandler(input).getOperator();
 
         List<Double> expectNumbers = List.of(1.0, 2.0, 3.0);
-        List<Double> actualNumbers = OperatorParser.extractNumbers(input,actualOperator.getOperator());
+        List<Double> actualNumbers = OperatorParser.extractNumbers(input,actualOperator.getOperatorSymbol());
 
         Assertions.assertEquals(expectNumbers, actualNumbers);
     }
@@ -149,7 +149,7 @@ public class OperatorTest {
         Operator actualOperator = new OperatorHandler(input).getOperator();
 
         List<Double> expectNumbers = List.of(1.0, 2.0, 3.0);
-        List<Double> actualNumbers = OperatorParser.extractNumbers(input,actualOperator.getOperator());
+        List<Double> actualNumbers = OperatorParser.extractNumbers(input,actualOperator.getOperatorSymbol());
 
         Assertions.assertEquals(expectNumbers, actualNumbers);
     }
@@ -164,7 +164,7 @@ public class OperatorTest {
         Operator actualOperator = new OperatorHandler(input).getOperator();
 
         List<Double> expectNumbers = List.of(1.0, 2.0, 3.0);
-        List<Double> actualNumbers = OperatorParser.extractNumbers(input,actualOperator.getOperator());
+        List<Double> actualNumbers = OperatorParser.extractNumbers(input,actualOperator.getOperatorSymbol());
 
         Assertions.assertEquals(expectNumbers, actualNumbers);
     }
@@ -179,7 +179,7 @@ public class OperatorTest {
         Operator actualOperator = new OperatorHandler(input).getOperator();
 
         List<Double> expectNumbers = List.of(1.0, 2.0, 3.0);
-        List<Double> actualNumbers = OperatorParser.extractNumbers(input,actualOperator.getOperator());
+        List<Double> actualNumbers = OperatorParser.extractNumbers(input,actualOperator.getOperatorSymbol());
 
         Assertions.assertEquals(expectNumbers, actualNumbers);
     }

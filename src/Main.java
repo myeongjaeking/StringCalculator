@@ -15,8 +15,8 @@ public class Main {
 
         Operator operator = new OperatorHandler(input).getOperator();
 
-        String replaceSeparatorToOperator = OperatorParser.replaceSeparatorToOperator(input,operator.getOperator());
-        List<Double> numbers = OperatorParser.extractNumbers(input,operator.getOperator());
+        String replaceSeparatorToOperator = OperatorParser.replaceSeparatorToOperator(input,operator.getOperatorSymbol());
+        List<Double> numbers = OperatorParser.extractNumbers(input,operator.getOperatorSymbol());
 
         double result = Calculate.getResult(numbers,operator);
         Output.getCalculateResult(result,replaceSeparatorToOperator);

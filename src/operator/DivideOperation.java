@@ -13,7 +13,7 @@ public class DivideOperation implements Operator {
     }
 
     @Override
-    public String getOperator() {
+    public String getOperatorSymbol() {
         return "/";
     }
 

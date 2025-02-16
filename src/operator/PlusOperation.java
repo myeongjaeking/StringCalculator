@@ -8,7 +8,7 @@ public class PlusOperation implements Operator {
     }
 
     @Override
-    public String getOperator() {
+    public String getOperatorSymbol() {
         return "+";
     }
 
