@@ -1,7 +1,7 @@
-import calculator.Calculate;
-import io.InputHandler;
+import calculator.Calculator;
+import io.Input;
 import io.Output;
-import operator.Operator;
+import operator.Operation;
 import operator.OperatorHandler;
 import operator.OperatorParser;
 
@@ -10,16 +10,16 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
-        InputHandler inputHandler = new InputHandler();
+        Input inputHandler = new Input();
         String input = inputHandler.getInput();
 
-        Operator operator = new OperatorHandler(input).getOperator();
+        Operation operator = new OperatorHandler(input).getOperator();
 
-        String replaceSeparatorToOperator = OperatorParser.replaceSeparatorToOperator(input,operator.getOperatorSymbol());
-        List<Double> numbers = OperatorParser.extractNumbers(input,operator.getOperatorSymbol());
+        String replaceSeparatorToOperator = OperatorParser.replaceSeparatorToOperator(input, operator.getSymbol());
+        List<Double> numbers = OperatorParser.extractNumbers(input, operator.getSymbol());
 
-        double result = Calculate.getResult(numbers,operator);
-        Output.getCalculateResult(result,replaceSeparatorToOperator);
+        double result = Calculator.calculate(numbers, operator);
+        Output.getCalculateResult(result, replaceSeparatorToOperator);
     }
 
 }

@@ -4,6 +4,13 @@ import static exception.ErrorMessage.*;
 
 public class InputValidation {
 
+    private InputValidation() {
+    }
+
+    private static char getOperatorChar(String input) {
+        return input.charAt(input.length() - 1);
+    }
+
     private static void validateNullInput(String input) {
         if (input == null || input.isEmpty()) {
             throw new IllegalArgumentException(INPUT_NOT_NULL.getMessage());
@@ -36,10 +43,29 @@ public class InputValidation {
         }
     }
 
+    private static void isInputContainOperator(String input, char symbol) {
+        String inputContainOperator = input.substring(0, input.length() - 1);
+
+        if (inputContainOperator.contains(String.valueOf(symbol))) {
+            throw new IllegalArgumentException(SEPARATOR_NOT_FOUND.getMessage());
+        }
+    }
+
+    private static void isSymbol(char symbol) {
+        boolean isValidOperator = symbol == '+' || symbol == '-' || symbol == '*' || symbol == '/';
+
+        if (!isValidOperator) {
+            throw new IllegalArgumentException(INPUT_EMPTY_OPERATOR.getMessage());
+        }
+    }
+
     public static void validateInput(String input) {
+        char symbol = getOperatorChar(input);
         validateNullInput(input);
         validateConsecutiveSeparators(input);
         validateOperatorPrecededBySpace(input);
+        isInputContainOperator(input, symbol);
+        isSymbol(symbol);
     }
 
 }

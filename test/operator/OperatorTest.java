@@ -1,6 +1,6 @@
 package operator;
 
-import io.InputHandler;
+import io.Input;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -33,79 +33,12 @@ public class OperatorTest {
     }
 
     @Test
-    @DisplayName("PlusOperation 반환")
-    void testPlusOperation() {
-        String testInput = "1,2:3 +\n";
-        setInput(testInput);
-        InputHandler inputHandler = new InputHandler();
-        String input = inputHandler.getInput();
-        Operator expectOperator = new PlusOperation();
-        Operator actualOperator = new OperatorHandler(input).getOperator();
-
-        String expectString = expectOperator.replaceSeparatorToOperator(input);
-        String actualString = actualOperator.replaceSeparatorToOperator(input);
-
-        Assertions.assertEquals(expectString, actualString);
-    }
-
-    @Test
-    @DisplayName("MinusOperation 반환")
-    void testMinusOperation() {
-        String testInput = "1,2:3 -\n";
-        setInput(testInput);
-        InputHandler inputHandler = new InputHandler();
-        String input = inputHandler.getInput();
-        Operator expectOperator = new MinusOperation();
-        Operator actualOperator = new OperatorHandler(input).getOperator();
-
-        String expectString = OperatorParser.replaceSeparatorToOperator(input,expectOperator.getOperatorSymbol());
-        String actualString = OperatorParser.replaceSeparatorToOperator(input,actualOperator.getOperatorSymbol());
-
-        Assertions.assertEquals(expectString, actualString);
-    }
-
-    @Test
-    @DisplayName("DivideOperation 반환")
-    void testDivideOperation() {
-        String testInput = "1,2:3 /\n";
-        setInput(testInput);
-        InputHandler inputHandler = new InputHandler();
-        String input = inputHandler.getInput();
-        Operator expectOperator = new DivideOperation();
-        Operator actualOperator = new OperatorHandler(input).getOperator();
-
-        String expectString = OperatorParser.replaceSeparatorToOperator(input,expectOperator.getOperatorSymbol());
-        String actualString = OperatorParser.replaceSeparatorToOperator(input,actualOperator.getOperatorSymbol());
-
-        Assertions.assertEquals(expectString, actualString);
-    }
-
-    @Test
-    @DisplayName("MultiplyOperation 반환")
-    void testMultiplyOperation() {
-        String testInput = "1,2:3 *\n";
-        setInput(testInput);
-        InputHandler inputHandler = new InputHandler();
-        String input = inputHandler.getInput();
-        Operator expectOperator = new MultiplyOperation();
-        Operator actualOperator = new OperatorHandler(input).getOperator();
-
-        String expectString = OperatorParser.replaceSeparatorToOperator(input,expectOperator.getOperatorSymbol());
-        String actualString = OperatorParser.replaceSeparatorToOperator(input,actualOperator.getOperatorSymbol());
-
-        Assertions.assertEquals(expectString, actualString);
-    }
-
-    @Test
     @DisplayName("사칙연산에 없는 operator 예외발생")
     void testValidExistOperation() {
         String testInput = "1,2:3 ?\n";
         setInput(testInput);
-        InputHandler inputHandler = new InputHandler();
-        String input = inputHandler.getInput();
 
-        IllegalArgumentException exception = Assertions.assertThrows(IllegalArgumentException.class, () ->
-                new OperatorHandler(input));
+        IllegalArgumentException exception = Assertions.assertThrows(IllegalArgumentException.class, Input::new);
 
         Assertions.assertEquals(exception.getMessage(), INPUT_EMPTY_OPERATOR.getMessage());
     }
@@ -115,11 +48,8 @@ public class OperatorTest {
     void testValidNotFoundSeparator() {
         String testInput = "1+2:3 +\n";
         setInput(testInput);
-        InputHandler inputHandler = new InputHandler();
-        String input = inputHandler.getInput();
 
-        IllegalArgumentException exception = Assertions.assertThrows(IllegalArgumentException.class, () ->
-                new OperatorHandler(input));
+        IllegalArgumentException exception = Assertions.assertThrows(IllegalArgumentException.class, Input::new);
 
         Assertions.assertEquals(exception.getMessage(), SEPARATOR_NOT_FOUND.getMessage());
     }
@@ -129,14 +59,13 @@ public class OperatorTest {
     void testExtractMultiplyOperation() {
         String testInput = "1,2:3 *\n";
         setInput(testInput);
-        InputHandler inputHandler = new InputHandler();
+        Input inputHandler = new Input();
         String input = inputHandler.getInput();
-        Operator actualOperator = new OperatorHandler(input).getOperator();
+        Operation actualOperator = new OperatorHandler(input).getOperator();
 
-        List<Double> expectNumbers = List.of(1.0, 2.0, 3.0);
-        List<Double> actualNumbers = OperatorParser.extractNumbers(input,actualOperator.getOperatorSymbol());
+        List<Double> actualNumbers = OperatorParser.extractNumbers(input, actualOperator.getSymbol());
 
-        Assertions.assertEquals(expectNumbers, actualNumbers);
+        Assertions.assertEquals(List.of(1.0, 2.0, 3.0), actualNumbers);
     }
 
     @Test
@@ -144,12 +73,12 @@ public class OperatorTest {
     void testExtractDivideOperation() {
         String testInput = "1,2:3 /\n";
         setInput(testInput);
-        InputHandler inputHandler = new InputHandler();
+        Input inputHandler = new Input();
         String input = inputHandler.getInput();
-        Operator actualOperator = new OperatorHandler(input).getOperator();
+        Operation actualOperator = new OperatorHandler(input).getOperator();
 
         List<Double> expectNumbers = List.of(1.0, 2.0, 3.0);
-        List<Double> actualNumbers = OperatorParser.extractNumbers(input,actualOperator.getOperatorSymbol());
+        List<Double> actualNumbers = OperatorParser.extractNumbers(input, actualOperator.getSymbol());
 
         Assertions.assertEquals(expectNumbers, actualNumbers);
     }
@@ -159,14 +88,13 @@ public class OperatorTest {
     void testExtractMinusOperation() {
         String testInput = "1,2:3 -\n";
         setInput(testInput);
-        InputHandler inputHandler = new InputHandler();
+        Input inputHandler = new Input();
         String input = inputHandler.getInput();
-        Operator actualOperator = new OperatorHandler(input).getOperator();
+        Operation actualOperator = new OperatorHandler(input).getOperator();
 
-        List<Double> expectNumbers = List.of(1.0, 2.0, 3.0);
-        List<Double> actualNumbers = OperatorParser.extractNumbers(input,actualOperator.getOperatorSymbol());
+        List<Double> actualNumbers = OperatorParser.extractNumbers(input, actualOperator.getSymbol());
 
-        Assertions.assertEquals(expectNumbers, actualNumbers);
+        Assertions.assertEquals(List.of(1.0, 2.0, 3.0), actualNumbers);
     }
 
     @Test
@@ -174,14 +102,13 @@ public class OperatorTest {
     void testExtractPlusOperation() {
         String testInput = "1,2:3 +\n";
         setInput(testInput);
-        InputHandler inputHandler = new InputHandler();
+        Input inputHandler = new Input();
         String input = inputHandler.getInput();
-        Operator actualOperator = new OperatorHandler(input).getOperator();
+        Operation actualOperator = new OperatorHandler(input).getOperator();
 
-        List<Double> expectNumbers = List.of(1.0, 2.0, 3.0);
-        List<Double> actualNumbers = OperatorParser.extractNumbers(input,actualOperator.getOperatorSymbol());
+        List<Double> actualNumbers = OperatorParser.extractNumbers(input, actualOperator.getSymbol());
 
-        Assertions.assertEquals(expectNumbers, actualNumbers);
+        Assertions.assertEquals(List.of(1.0, 2.0, 3.0), actualNumbers);
     }
 
 }

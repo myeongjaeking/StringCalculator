@@ -1,12 +1,15 @@
 package calculator;
 
-import operator.Operator;
+import operator.Operation;
 
 import java.util.List;
 
-public class Calculate {
+public class Calculator {
 
-    public static double getResult(List<Double> numbers, Operator operator) {
+    private Calculator() {
+    }
+
+    public static double calculate(List<Double> numbers, Operation operator) {
         double result = numbers.get(0);
 
         for (int i = 1; i < numbers.size(); i++) {

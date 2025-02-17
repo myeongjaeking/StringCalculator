@@ -10,25 +10,30 @@ import static separator.Separator.REST_SEPARATOR;
 
 public class OperatorParser {
 
-    public static String replaceSeparatorToOperator(String input, String operator) {
-        String replacedSeparatorToOperator = input.replace(COLON_SEPARATOR.getSeparator(), operator)
-                .replace(REST_SEPARATOR.getSeparator(), operator);
+    private OperatorParser() {
+    }
+
+    public static Double changeNumber(String number){
+        try {
+            return Double.parseDouble(number);
+        }catch (NumberFormatException e){
+            throw new IllegalArgumentException(MUST_CHANGE_NUMBER.getMessage());
+        }
+    }
+
+    public static String replaceSeparatorToOperator(String input, String symbol) {
+        String replacedSeparatorToOperator = input.replace(COLON_SEPARATOR.getSeparator(), symbol)
+                .replace(REST_SEPARATOR.getSeparator(), symbol);
 
         return replacedSeparatorToOperator.substring(0, replacedSeparatorToOperator.length() - 1);
     }
 
-    public static List<Double> extractNumbers(String input, String operator) {
-        String regularOperator = "\\%s".formatted(operator);
+    public static List<Double> extractNumbers(String input, String symbol) {
+        String regularOperator = "\\%s".formatted(symbol);
 
-        return Arrays.stream(replaceSeparatorToOperator(input, operator).split(regularOperator))
+        return Arrays.stream(replaceSeparatorToOperator(input, symbol).split(regularOperator))
                 .map(String::trim)
-                .map(number -> {
-                    try {
-                        return Double.parseDouble(number);
-                    } catch (NumberFormatException e) {
-                        throw new IllegalArgumentException(MUST_CHANGE_NUMBER.getMessage());
-                    }
-                })
+                .map(OperatorParser::changeNumber)
                 .collect(Collectors.toList());
     }
 
