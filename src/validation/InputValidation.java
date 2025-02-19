@@ -17,6 +17,13 @@ public class InputValidation {
         }
     }
 
+    private static void validateBlank(String input) {
+        String validateInput = input.substring(0, input.length() - 2);
+        if (validateInput.contains(" ")) {
+            throw new IllegalArgumentException(INPUT_NOT_BLANK.getMessage());
+        }
+    }
+
     private static void validateConsecutiveSeparators(String input) {
         int count = 0;
 
@@ -60,8 +67,9 @@ public class InputValidation {
     }
 
     public static void validateInput(String input) {
-        char symbol = getOperatorChar(input);
         validateNullInput(input);
+        char symbol = getOperatorChar(input);
+        validateBlank(input);
         validateConsecutiveSeparators(input);
         validateOperatorPrecededBySpace(input);
         isInputContainOperator(input, symbol);

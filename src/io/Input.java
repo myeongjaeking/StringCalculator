@@ -10,12 +10,11 @@ public class Input {
     private final Scanner scanner = new Scanner(System.in);
 
     public Input() {
-        setInput();
-        InputValidation.validateInput(input);
     }
 
     public void setInput() {
         this.input = scanner.nextLine();
+        InputValidation.validateInput(input);
     }
 
     public String getInput() {

@@ -35,11 +35,11 @@ public class InputTest {
         String testInput = "1,2:3 +\n";
         setInput(testInput);
         Input input = new Input();
+        input.setInput();
 
-        String expectInput = "1,2:3 +";
         String actualInput = input.getInput();
 
-        Assertions.assertEquals(actualInput, expectInput);
+        Assertions.assertEquals("1,2:3 +", actualInput);
     }
 
     @Test
@@ -47,8 +47,9 @@ public class InputTest {
     void testValidNullInput() {
         String testInput = "\n";
         setInput(testInput);
+        Input input = new Input();
 
-        IllegalArgumentException exception = Assertions.assertThrows(IllegalArgumentException.class, Input::new);
+        IllegalArgumentException exception = Assertions.assertThrows(IllegalArgumentException.class, input::setInput);
 
         Assertions.assertEquals(ErrorMessage.INPUT_NOT_NULL.getMessage(), exception.getMessage());
     }
@@ -58,8 +59,9 @@ public class InputTest {
     void testValidateConsecutiveSeparators() {
         String testInput = "1,2,:3 +\n";
         setInput(testInput);
+        Input input = new Input();
 
-        IllegalArgumentException exception = Assertions.assertThrows(IllegalArgumentException.class, Input::new);
+        IllegalArgumentException exception = Assertions.assertThrows(IllegalArgumentException.class, input::setInput);
 
         Assertions.assertEquals(ErrorMessage.CONTINUOUS_SEPARATOR.getMessage(), exception.getMessage());
     }
@@ -69,10 +71,23 @@ public class InputTest {
     void testValidateOperatorPrecededBySpace() {
         String testInput = "1,2,:3 +\n";
         setInput(testInput);
+        Input input = new Input();
 
-        IllegalArgumentException exception = Assertions.assertThrows(IllegalArgumentException.class, Input::new);
+        IllegalArgumentException exception = Assertions.assertThrows(IllegalArgumentException.class, input::setInput);
 
         Assertions.assertEquals(ErrorMessage.CONTINUOUS_SEPARATOR.getMessage(), exception.getMessage());
+    }
+
+    @Test
+    @DisplayName("입력 문자열의 공백이 존재할 때 예외가 발생한다.")
+    void testValidateBlank() {
+        String testInput = " 1,2,:3 +\n";
+        setInput(testInput);
+        Input input = new Input();
+
+        IllegalArgumentException exception = Assertions.assertThrows(IllegalArgumentException.class, input::setInput);
+
+        Assertions.assertEquals(ErrorMessage.INPUT_NOT_BLANK.getMessage(), exception.getMessage());
     }
 
 }
