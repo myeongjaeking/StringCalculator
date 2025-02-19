@@ -30,7 +30,19 @@
 7-2-3 = 2
 4/2/5 = 0.4
 
+예외 처리
+
+1. 입력 값이 빈 문자열이거나, null인 경우 IllegalArgumentException 발생
+2. 입력 값에 잘못된 구분자가 들어간 경우 IllegalArgumentException 발생
+3. 입력 값 마지막 문자가 정해진 사칙연산이 아닌 경우 IllegalArgumentException 발생
+4. 입력 값에서 0으로 나눌려고 시도할 경우 IllegalArgumentException 발생
+5. 입력 값에서 숫자를 추출할 때 잘못된 추출을 시도하면 IllegalArgumentException 발생
+6. 입력 값에 연속된 구분자가 존재하면 IllegalArgumentException 발생
+7. 입력 값에 사칙연산 앞 문자가 공백이 아니면 IllegalArgumentException 발생
+8. 입력 값에 공백이 존재하면 IllegalArgumentException 발생
+
 클래스 구조 설계 
+```plaintext
 ├── src
 │   ├── Main.java
 │   ├── calculator
@@ -56,15 +68,3 @@
 │   └── operator
 │       └── OperatorTest.java
 └── 디렉토리.txt
-
-
-예외 처리
-
-1. 입력 값이 빈 문자열이거나, null인 경우 IllegalArgumentException 발생
-2. 입력 값에 잘못된 구분자가 들어간 경우 IllegalArgumentException 발생
-3. 입력 값 마지막 문자가 정해진 사칙연산이 아닌 경우 IllegalArgumentException 발생
-4. 입력 값에서 0으로 나눌려고 시도할 경우 IllegalArgumentException 발생
-5. 입력 값에서 숫자를 추출할 때 잘못된 추출을 시도하면 IllegalArgumentException 발생
-6. 입력 값에 연속된 구분자가 존재하면 IllegalArgumentException 발생
-7. 입력 값에 사칙연산 앞 문자가 공백이 아니면 IllegalArgumentException 발생
-8. 입력 값에 공백이 존재하면 IllegalArgumentException 발생
