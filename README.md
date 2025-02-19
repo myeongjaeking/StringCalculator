@@ -31,7 +31,32 @@
 4/2/5 = 0.4
 
 클래스 구조 설계 
-src/ ├── calculator/ | ├── Calculate.java //클래스 ├── exception/ | ├── ErrorMessage.java //열거형 ├── io/ | ├── InputHandler.java //클래스 | ├── Output.java //클래스 ├── operator/ | ├── DivideOperation.java //클래스 | ├── MinusOperation.java //클래스 | ├── MultiplyOperation.java //클레스 | ├── Operator.java //인터페이스 | ├── OperatorHandler.java //클래스 | ├── PlusOperation.java //클래스 ├── separator/ | ├── Separator.java //클래스 ├── validation/ | ├── InputValidation.java //클래스 ├── Main.java //클래스
+├── src
+│   ├── Main.java
+│   ├── calculator
+│   │   └── Calculator.java
+│   ├── exception
+│   │   └── ErrorMessage.java
+│   ├── io
+│   │   ├── Input.java
+│   │   └── Output.java
+│   ├── operator
+│   │   ├── Operation.java
+│   │   ├── OperatorHandler.java
+│   │   └── OperatorParser.java
+│   ├── separator
+│   │   └── Separator.java
+│   └── validation
+│       └── InputValidation.java
+├── test
+│   ├── calculator
+│   │   └── CalculatorTest.java
+│   ├── io
+│   │   └── InputTest.java
+│   └── operator
+│       └── OperatorTest.java
+└── 디렉토리.txt
+
 
 예외 처리
 
@@ -42,3 +67,4 @@ src/ ├── calculator/ | ├── Calculate.java //클래스 ├── exce
 5. 입력 값에서 숫자를 추출할 때 잘못된 추출을 시도하면 IllegalArgumentException 발생
 6. 입력 값에 연속된 구분자가 존재하면 IllegalArgumentException 발생
 7. 입력 값에 사칙연산 앞 문자가 공백이 아니면 IllegalArgumentException 발생
+8. 입력 값에 공백이 존재하면 IllegalArgumentException 발생
