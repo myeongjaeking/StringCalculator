@@ -8,15 +8,10 @@ import static exception.ErrorMessage.INPUT_EMPTY_OPERATOR;
 
 public enum Operation {
 
-    PLUS("+", (x, y) -> x + y),
+    PLUS("+", Double::sum),
     MINUS("-", (x, y) -> x - y),
     MULTIPLY("*", (x, y) -> x * y),
-    DIVIDE("/", (x, y) -> {
-        if (y == 0) {
-            throw new IllegalArgumentException(CANNOT_DIVIDE_BY_ZERO.getMessage());
-        }
-        return x / y;
-    });
+    DIVIDE("/", Operation::divide);
 
     private final DoubleBinaryOperator op;
     private final String symbol;
@@ -30,8 +25,15 @@ public enum Operation {
         return symbol;
     }
 
-    public double calculate(double x, double y) {
-        return op.applyAsDouble(x, y);
+    private static double divide(double x, double y) {
+        if (y == 0) {
+            throw new ArithmeticException(CANNOT_DIVIDE_BY_ZERO.getMessage());
+        }
+        return x / y;
+    }
+
+    public double calculate(double accumulator, double operand) {
+        return op.applyAsDouble(accumulator, operand);
     }
 
     public static Operation fromSymbol(char symbol) {
