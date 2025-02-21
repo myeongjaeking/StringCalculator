@@ -7,6 +7,16 @@ public class InputValidation {
     private InputValidation() {
     }
 
+    public static void validateInput(String input) {
+        validateNullInput(input);
+        char symbol = getOperatorChar(input);
+        isInputContainOperator(input, symbol);
+        isSymbol(symbol);
+        validateBlank(input);
+        validateConsecutiveSeparators(input);
+        validateOperatorPrecededBySpace(input);
+    }
+
     private static char getOperatorChar(String input) {
         return input.charAt(input.length() - 1);
     }
@@ -64,16 +74,6 @@ public class InputValidation {
         if (!isValidOperator) {
             throw new IllegalArgumentException(INPUT_EMPTY_OPERATOR.getMessage());
         }
-    }
-
-    public static void validateInput(String input) {
-        validateNullInput(input);
-        char symbol = getOperatorChar(input);
-        validateBlank(input);
-        validateConsecutiveSeparators(input);
-        validateOperatorPrecededBySpace(input);
-        isInputContainOperator(input, symbol);
-        isSymbol(symbol);
     }
 
 }
