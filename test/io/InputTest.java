@@ -13,14 +13,13 @@ import org.junit.jupiter.api.Test;
 public class InputTest {
 
     private final InputStream systemIn;
-    private ByteArrayInputStream testIn;
 
     public InputTest() {
         this.systemIn = System.in;
     }
 
     private void setInput(String data) {
-        this.testIn = new ByteArrayInputStream(data.getBytes());
+        ByteArrayInputStream testIn = new ByteArrayInputStream(data.getBytes());
         System.setIn(testIn);
     }
 
@@ -35,7 +34,7 @@ public class InputTest {
         String testInput = "1,2:3 +\n";
         setInput(testInput);
         Input input = new Input();
-        input.setInput();
+        input.readInput();
 
         String actualInput = input.getInput();
 
@@ -43,15 +42,15 @@ public class InputTest {
     }
 
     @Test
-    @DisplayName("입력 문자열이 비어있을 때 예외가 발생한다.")
+    @DisplayName("입력 문자열이 개행문자만 존재할 때 예외가 발생한다.")
     void testValidNullInput() {
         String testInput = "\n";
         setInput(testInput);
         Input input = new Input();
 
-        IllegalArgumentException exception = Assertions.assertThrows(IllegalArgumentException.class, input::setInput);
+        Throwable exception = Assertions.assertThrows(IllegalArgumentException.class, input::readInput);
 
-        Assertions.assertEquals(ErrorMessage.INPUT_NOT_NULL.getMessage(), exception.getMessage());
+        Assertions.assertEquals(ErrorMessage.INPUT_NOT_EMPTY.getMessage(), exception.getMessage());
     }
 
     @Test
@@ -61,7 +60,7 @@ public class InputTest {
         setInput(testInput);
         Input input = new Input();
 
-        IllegalArgumentException exception = Assertions.assertThrows(IllegalArgumentException.class, input::setInput);
+        Throwable exception = Assertions.assertThrows(IllegalArgumentException.class, input::readInput);
 
         Assertions.assertEquals(ErrorMessage.CONTINUOUS_SEPARATOR.getMessage(), exception.getMessage());
     }
@@ -73,7 +72,7 @@ public class InputTest {
         setInput(testInput);
         Input input = new Input();
 
-        IllegalArgumentException exception = Assertions.assertThrows(IllegalArgumentException.class, input::setInput);
+        Throwable exception = Assertions.assertThrows(IllegalArgumentException.class, input::readInput);
 
         Assertions.assertEquals(ErrorMessage.CONTINUOUS_SEPARATOR.getMessage(), exception.getMessage());
     }
@@ -85,9 +84,33 @@ public class InputTest {
         setInput(testInput);
         Input input = new Input();
 
-        IllegalArgumentException exception = Assertions.assertThrows(IllegalArgumentException.class, input::setInput);
+        Throwable exception = Assertions.assertThrows(IllegalArgumentException.class, input::readInput);
 
         Assertions.assertEquals(ErrorMessage.INPUT_NOT_BLANK.getMessage(), exception.getMessage());
+    }
+
+    @Test
+    @DisplayName("입력 문자열 중간에 사칙연산자가 존재할 때 예외가 발생한다.")
+    void testIsOperatorLastIndex() {
+        String testInput = "1,2+3 +\n";
+        setInput(testInput);
+        Input input = new Input();
+
+        Throwable exception = Assertions.assertThrows(IllegalArgumentException.class, input::readInput);
+
+        Assertions.assertEquals(ErrorMessage.OPERATOR_MUST_LAST_INDEX.getMessage(), exception.getMessage());
+    }
+
+    @Test
+    @DisplayName("입력 문자열 마지막 문자가 유효한 연산자가 아닐 때 예외가 발생한다.")
+    void testDog() {
+        String testInput = "1,2:3 \n";
+        setInput(testInput);
+        Input input = new Input();
+
+        Throwable exception = Assertions.assertThrows(IllegalArgumentException.class, input::readInput);
+
+        Assertions.assertEquals(ErrorMessage.INPUT_EMPTY_OPERATOR.getMessage(), exception.getMessage());
     }
 
 }

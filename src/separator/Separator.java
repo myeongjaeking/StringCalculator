@@ -7,7 +7,7 @@ public enum Separator {
 
     private final String separator;
 
-    private Separator(String separator) {
+    Separator(String separator) {
         this.separator = separator;
     }
 

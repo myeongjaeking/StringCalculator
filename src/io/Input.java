@@ -7,14 +7,15 @@ import validation.InputValidation;
 public class Input {
 
     private String input;
+    private final InputValidation inputValidation = new InputValidation();
     private final Scanner scanner = new Scanner(System.in);
 
     public Input() {
     }
 
-    public void setInput() {
+    public void readInput() {
         this.input = scanner.nextLine();
-        InputValidation.validateInput(input);
+        inputValidation.validateInput(input);
     }
 
     public String getInput() {
