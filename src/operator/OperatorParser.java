@@ -13,7 +13,7 @@ public class OperatorParser {
     private OperatorParser() {
     }
 
-    public static Double changeNumber(String number){
+    public static Double parseDouble(String number){
         try {
             return Double.parseDouble(number);
         }catch (NumberFormatException e){
@@ -33,7 +33,7 @@ public class OperatorParser {
 
         return Arrays.stream(replaceSeparatorToOperator(input, symbol).split(regularOperator))
                 .map(String::trim)
-                .map(OperatorParser::changeNumber)
+                .map(OperatorParser::parseDouble)
                 .collect(Collectors.toList());
     }
 

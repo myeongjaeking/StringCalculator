@@ -2,10 +2,11 @@ import calculator.Calculator;
 import io.Input;
 import io.Output;
 import operator.Operation;
-import operator.OperatorHandler;
 import operator.OperatorParser;
 
 import java.util.List;
+
+import static validation.InputValidation.SYMBOL;
 
 public class Main {
 
@@ -14,13 +15,13 @@ public class Main {
         input.readInput();
         String userInput = input.getInput();
 
-        Operation operator = new OperatorHandler(userInput).getOperator();
+        Operation operator = Operation.fromSymbol(SYMBOL);
 
-        String replaceSeparatorToOperator = OperatorParser.replaceSeparatorToOperator(userInput, operator.getSymbol());
-        List<Double> numbers = OperatorParser.extractNumbers(userInput, operator.getSymbol());
+        String replacedSeparatorToOperator = OperatorParser.replaceSeparatorToOperator(userInput, operator.getSymbol());
+        List<Double> operands = OperatorParser.extractNumbers(userInput, operator.getSymbol());
 
-        double result = Calculator.calculate(numbers, operator);
-        Output.getCalculateResult(result, replaceSeparatorToOperator);
+        double result = Calculator.calculate(operands, operator);
+        Output.getCalculateResult(result, replacedSeparatorToOperator);
     }
 
 }

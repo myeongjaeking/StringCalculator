@@ -1,7 +1,6 @@
 package calculator;
 
 import operator.Operation;
-import operator.OperatorHandler;
 import operator.OperatorParser;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;

@@ -4,7 +4,8 @@ import static exception.ErrorMessage.*;
 
 public class InputValidation {
 
-    private final int LAST_SYMBOL_INDEX = 1;
+    public static char SYMBOL;
+    public static final int LAST_SYMBOL_INDEX = 1;
     private final int BEFORE_LAST_SYMBOL_INDEX = 2;
 
     public InputValidation() {
@@ -13,10 +14,10 @@ public class InputValidation {
     public void validateInput(String input) {
         validateNullInput(input);
         validateEmptyInput(input);
-        char symbol = getOperatorChar(input);
-        isSymbolLastIndex(input, symbol);
-        isInputContainOperator(input, symbol);
-        isSymbol(symbol);
+        SYMBOL = getOperatorChar(input);
+        isSymbolLastIndex(input);
+        isInputContainOperator(input);
+        isSymbol();
         validateBlank(input);
         validateConsecutiveSeparators(input);
         validateOperatorPrecededBySpace(input);
@@ -71,24 +72,24 @@ public class InputValidation {
         }
     }
 
-    private void isInputContainOperator(String input, char symbol) {
+    private void isInputContainOperator(String input) {
         String inputContainOperator = input.substring(0, input.length() - LAST_SYMBOL_INDEX);
 
-        if (inputContainOperator.contains(String.valueOf(symbol))) {
+        if (inputContainOperator.contains(String.valueOf(SYMBOL))) {
             throw new IllegalArgumentException(SEPARATOR_NOT_FOUND.getMessage());
         }
     }
 
-    private void isSymbol(char symbol) {
-        boolean isValidOperator = symbol == '+' || symbol == '-' || symbol == '*' || symbol == '/';
+    private void isSymbol() {
+        boolean isValidOperator = SYMBOL == '+' || SYMBOL == '-' || SYMBOL == '*' || SYMBOL == '/';
 
         if (!isValidOperator) {
             throw new IllegalArgumentException(INPUT_EMPTY_OPERATOR.getMessage());
         }
     }
 
-    private void isSymbolLastIndex(String input, char symbol) {
-        if (input.indexOf(symbol) != input.length() - LAST_SYMBOL_INDEX) {
+    private void isSymbolLastIndex(String input) {
+        if (input.indexOf(SYMBOL) != input.length() - LAST_SYMBOL_INDEX) {
             throw new IllegalArgumentException(OPERATOR_MUST_LAST_INDEX.getMessage());
         }
     }
