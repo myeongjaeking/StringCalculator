@@ -13,7 +13,7 @@ public class Input {
     public Input() {
     }
 
-    public void readInput() {
+    public void typeInput() {
         this.input = scanner.nextLine();
         inputValidation.validateInput(input);
     }

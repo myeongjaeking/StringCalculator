@@ -34,7 +34,7 @@ public class InputTest {
         String testInput = "1,2:3 +\n";
         setInput(testInput);
         Input input = new Input();
-        input.readInput();
+        input.typeInput();
 
         String actualInput = input.getInput();
 
@@ -48,7 +48,7 @@ public class InputTest {
         setInput(testInput);
         Input input = new Input();
 
-        Throwable exception = Assertions.assertThrows(IllegalArgumentException.class, input::readInput);
+        Throwable exception = Assertions.assertThrows(IllegalArgumentException.class, input::typeInput);
 
         Assertions.assertEquals(ErrorMessage.INPUT_NOT_EMPTY.getMessage(), exception.getMessage());
     }
@@ -60,7 +60,7 @@ public class InputTest {
         setInput(testInput);
         Input input = new Input();
 
-        Throwable exception = Assertions.assertThrows(IllegalArgumentException.class, input::readInput);
+        Throwable exception = Assertions.assertThrows(IllegalArgumentException.class, input::typeInput);
 
         Assertions.assertEquals(ErrorMessage.CONTINUOUS_SEPARATOR.getMessage(), exception.getMessage());
     }
@@ -72,7 +72,7 @@ public class InputTest {
         setInput(testInput);
         Input input = new Input();
 
-        Throwable exception = Assertions.assertThrows(IllegalArgumentException.class, input::readInput);
+        Throwable exception = Assertions.assertThrows(IllegalArgumentException.class, input::typeInput);
 
         Assertions.assertEquals(ErrorMessage.CONTINUOUS_SEPARATOR.getMessage(), exception.getMessage());
     }
@@ -84,7 +84,7 @@ public class InputTest {
         setInput(testInput);
         Input input = new Input();
 
-        Throwable exception = Assertions.assertThrows(IllegalArgumentException.class, input::readInput);
+        Throwable exception = Assertions.assertThrows(IllegalArgumentException.class, input::typeInput);
 
         Assertions.assertEquals(ErrorMessage.INPUT_NOT_BLANK.getMessage(), exception.getMessage());
     }
@@ -96,7 +96,7 @@ public class InputTest {
         setInput(testInput);
         Input input = new Input();
 
-        Throwable exception = Assertions.assertThrows(IllegalArgumentException.class, input::readInput);
+        Throwable exception = Assertions.assertThrows(IllegalArgumentException.class, input::typeInput);
 
         Assertions.assertEquals(ErrorMessage.OPERATOR_MUST_LAST_INDEX.getMessage(), exception.getMessage());
     }
@@ -108,7 +108,7 @@ public class InputTest {
         setInput(testInput);
         Input input = new Input();
 
-        Throwable exception = Assertions.assertThrows(IllegalArgumentException.class, input::readInput);
+        Throwable exception = Assertions.assertThrows(IllegalArgumentException.class, input::typeInput);
 
         Assertions.assertEquals(ErrorMessage.INPUT_EMPTY_OPERATOR.getMessage(), exception.getMessage());
     }

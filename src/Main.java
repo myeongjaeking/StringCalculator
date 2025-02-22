@@ -12,7 +12,7 @@ public class Main {
 
     public static void main(String[] args) {
         Input input = new Input();
-        input.readInput();
+        input.typeInput();
         String userInput = input.getInput();
 
         Operation operator = Operation.fromSymbol(SYMBOL);
@@ -21,6 +21,7 @@ public class Main {
         List<Double> operands = OperatorParser.extractNumbers(userInput, operator.getSymbol());
 
         double result = Calculator.calculate(operands, operator);
+
         Output.getCalculateResult(result, replacedSeparatorToOperator);
     }
 
