@@ -9,12 +9,14 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static exception.ErrorMessage.CANNOT_DIVIDE_BY_ZERO;
+import static validation.InputValidation.SYMBOL;
 
 class CalculatorTest {
 
     private void testCalculator(String input,double expectResult){
-        Operation operation = new OperatorHandler(input).getOperator();
-        List<Double> numbers = OperatorParser.extractNumbers(input,operation.getSymbol());
+        Operation operation = Operation.fromSymbol(SYMBOL);
+        OperatorParser operatorParser = new OperatorParser(input,operation.getSymbol());
+        List<Double> numbers = operatorParser.extractNumbers();
         double actualResult = Calculator.calculate(numbers,operation);
 
         Assertions.assertEquals(actualResult,expectResult);
@@ -60,11 +62,12 @@ class CalculatorTest {
     @DisplayName("나누기 연산의 분모가 0일 때 예외발생가 발생한다.")
     void getValidDivideResult() {
         String input = "1,0,3 /";
-        Operation operator = new OperatorHandler(input).getOperator();
-        List<Double> numbers = OperatorParser.extractNumbers(input,operator.getSymbol());
+        Operation operator = Operation.fromSymbol('/');
+        OperatorParser operatorParser = new OperatorParser(input,operator.getSymbol());
+        List<Double> operands = operatorParser.extractNumbers();
 
         IllegalArgumentException exception = Assertions.assertThrows(IllegalArgumentException.class, () ->
-                Calculator.calculate(numbers, operator));
+                Calculator.calculate(operands, operator));
 
         Assertions.assertEquals(exception.getMessage(), CANNOT_DIVIDE_BY_ZERO.getMessage());
     }

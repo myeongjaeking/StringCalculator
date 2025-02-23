@@ -12,6 +12,7 @@ import java.util.List;
 
 import static exception.ErrorMessage.INPUT_EMPTY_OPERATOR;
 import static exception.ErrorMessage.SEPARATOR_NOT_FOUND;
+import static validation.InputValidation.SYMBOL;
 
 public class OperatorTest {
 
@@ -38,7 +39,7 @@ public class OperatorTest {
         String testInput = "1,2:3 ?\n";
         setInput(testInput);
 
-        IllegalArgumentException exception = Assertions.assertThrows(IllegalArgumentException.class, Input::new);
+        Throwable exception = Assertions.assertThrows(IllegalArgumentException.class, Input::new);
 
         Assertions.assertEquals(exception.getMessage(), INPUT_EMPTY_OPERATOR.getMessage());
     }
@@ -49,7 +50,7 @@ public class OperatorTest {
         String testInput = "1+2:3 +\n";
         setInput(testInput);
 
-        IllegalArgumentException exception = Assertions.assertThrows(IllegalArgumentException.class, Input::new);
+        Throwable exception = Assertions.assertThrows(IllegalArgumentException.class, Input::new);
 
         Assertions.assertEquals(exception.getMessage(), SEPARATOR_NOT_FOUND.getMessage());
     }
@@ -59,13 +60,14 @@ public class OperatorTest {
     void testExtractMultiplyOperation() {
         String testInput = "1,2:3 *\n";
         setInput(testInput);
-        Input inputHandler = new Input();
-        String input = inputHandler.getInput();
-        Operation actualOperator = new OperatorHandler(input).getOperator();
+        Input input = new Input();
+        String userInput = input.getInput();
+        Operation actualOperator = Operation.fromSymbol(SYMBOL);
+        OperatorParser operatorParser = new OperatorParser(userInput,actualOperator.getSymbol());
 
-        List<Double> actualNumbers = OperatorParser.extractNumbers(input, actualOperator.getSymbol());
+        List<Double> actualOperands = operatorParser.extractNumbers();
 
-        Assertions.assertEquals(List.of(1.0, 2.0, 3.0), actualNumbers);
+        Assertions.assertEquals(List.of(1.0, 2.0, 3.0), actualOperands);
     }
 
     @Test
@@ -73,42 +75,44 @@ public class OperatorTest {
     void testExtractDivideOperation() {
         String testInput = "1,2:3 /\n";
         setInput(testInput);
-        Input inputHandler = new Input();
-        String input = inputHandler.getInput();
-        Operation actualOperator = new OperatorHandler(input).getOperator();
+        Input input = new Input();
+        String userInput = input.getInput();
+        Operation actualOperator = Operation.fromSymbol(SYMBOL);
+        OperatorParser operatorParser = new OperatorParser(userInput,actualOperator.getSymbol());
 
-        List<Double> expectNumbers = List.of(1.0, 2.0, 3.0);
-        List<Double> actualNumbers = OperatorParser.extractNumbers(input, actualOperator.getSymbol());
+        List<Double> actualOperands = operatorParser.extractNumbers();
 
-        Assertions.assertEquals(expectNumbers, actualNumbers);
+        Assertions.assertEquals(List.of(1.0, 2.0, 3.0), actualOperands);
     }
 
     @Test
-    @DisplayName("MinusOperation 반환")
+    @DisplayName("MinusOperation Operands 리스트 형식으로 정상적으로 반환")
     void testExtractMinusOperation() {
         String testInput = "1,2:3 -\n";
         setInput(testInput);
-        Input inputHandler = new Input();
-        String input = inputHandler.getInput();
-        Operation actualOperator = new OperatorHandler(input).getOperator();
+        Input input = new Input();
+        String userInput = input.getInput();
+        Operation actualOperator = Operation.fromSymbol(SYMBOL);
+        OperatorParser operatorParser = new OperatorParser(userInput,actualOperator.getSymbol());
 
-        List<Double> actualNumbers = OperatorParser.extractNumbers(input, actualOperator.getSymbol());
+        List<Double> actualOperands = operatorParser.extractNumbers();
 
-        Assertions.assertEquals(List.of(1.0, 2.0, 3.0), actualNumbers);
+        Assertions.assertEquals(List.of(1.0, 2.0, 3.0), actualOperands);
     }
 
     @Test
-    @DisplayName("PlusOperation 반환")
+    @DisplayName("PlusOperation Operands 리스트 형식으로 정상적으로 반환")
     void testExtractPlusOperation() {
         String testInput = "1,2:3 +\n";
         setInput(testInput);
-        Input inputHandler = new Input();
-        String input = inputHandler.getInput();
-        Operation actualOperator = new OperatorHandler(input).getOperator();
+        Input input = new Input();
+        String userInput = input.getInput();
+        Operation actualOperator = Operation.fromSymbol(SYMBOL);
+        OperatorParser operatorParser = new OperatorParser(userInput,actualOperator.getSymbol());
 
-        List<Double> actualNumbers = OperatorParser.extractNumbers(input, actualOperator.getSymbol());
+        List<Double> actualOperands = operatorParser.extractNumbers();
 
-        Assertions.assertEquals(List.of(1.0, 2.0, 3.0), actualNumbers);
+        Assertions.assertEquals(List.of(1.0, 2.0, 3.0), actualOperands);
     }
 
 }
