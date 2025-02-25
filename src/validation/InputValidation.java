@@ -19,8 +19,8 @@ public class InputValidation {
         isInputContainOperator(input);
         isSymbol();
         validateBlank(input);
-        validateConsecutiveSeparators(input);
         validateOperatorPrecededBySpace(input);
+        validateConsecutiveSeparators(input);
     }
 
     private char getOperatorChar(String input) {

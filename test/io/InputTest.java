@@ -68,7 +68,7 @@ public class InputTest {
     @Test
     @DisplayName("입력 문자열의 사칙연산 앞의 문자가 공백이 아닐 경우 예외가 발생한다.")
     void testValidateOperatorPrecededBySpace() {
-        String testInput = "1,2,:3 +\n";
+        String testInput = "1,2,3+\n";
         setInput(testInput);
         Input input = new Input();
 
@@ -103,7 +103,7 @@ public class InputTest {
 
     @Test
     @DisplayName("입력 문자열 마지막 문자가 유효한 연산자가 아닐 때 예외가 발생한다.")
-    void testDog() {
+    void testIsSymbol() {
         String testInput = "1,2:3 \n";
         setInput(testInput);
         Input input = new Input();
@@ -111,6 +111,18 @@ public class InputTest {
         Throwable exception = Assertions.assertThrows(IllegalArgumentException.class, input::typeInput);
 
         Assertions.assertEquals(ErrorMessage.INPUT_EMPTY_OPERATOR.getMessage(), exception.getMessage());
+    }
+
+    @Test
+    @DisplayName("입력 문자열에 공백이 있을 경우 예외가 발생한다.")
+    void testContainBlank() {
+        String testInput = "1 ,2:3 +\n";
+        setInput(testInput);
+        Input input = new Input();
+
+        Throwable exception = Assertions.assertThrows(IllegalArgumentException.class, input::typeInput);
+
+        Assertions.assertEquals(ErrorMessage.INPUT_NOT_BLANK.getMessage(), exception.getMessage());
     }
 
 }
