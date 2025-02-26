@@ -3,6 +3,7 @@ import io.Input;
 import io.Output;
 import operator.Operation;
 import operator.OperatorParser;
+import validation.InputValidation;
 
 import java.util.List;
 
@@ -11,7 +12,9 @@ import static validation.InputValidation.SYMBOL;
 public class Main {
 
     public static void main(String[] args) {
-        Input input = new Input();
+        InputValidation inputValidation = new InputValidation();
+
+        Input input = new Input(inputValidation);
         input.typeInput();
         String userInput = input.getInput();
 

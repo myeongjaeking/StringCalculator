@@ -7,10 +7,11 @@ import validation.InputValidation;
 public class Input {
 
     private String input;
-    private final InputValidation inputValidation = new InputValidation();
+    private final InputValidation inputValidation;
     private final Scanner scanner = new Scanner(System.in);
 
-    public Input() {
+    public Input(InputValidation inputValidation) {
+        this.inputValidation = inputValidation;
     }
 
     public void typeInput() {
