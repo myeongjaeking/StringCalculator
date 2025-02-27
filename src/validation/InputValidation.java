@@ -7,6 +7,7 @@ public class InputValidation {
     public static char SYMBOL;
     public static final int LAST_SYMBOL_INDEX = 1;
     private final int BEFORE_LAST_SYMBOL_INDEX = 2;
+    private final char BLANK = ' ';
 
     public InputValidation() {
     }
@@ -65,7 +66,7 @@ public class InputValidation {
     }
 
     private void validateOperatorPrecededBySpace(String input) {
-        boolean isOperatorPrecededBySpace = input.charAt(input.length() - BEFORE_LAST_SYMBOL_INDEX) == ' ';
+        boolean isOperatorPrecededBySpace = input.charAt(input.length() - BEFORE_LAST_SYMBOL_INDEX) == BLANK;
 
         if (!isOperatorPrecededBySpace) {
             throw new IllegalArgumentException(OPERATOR_MUST_HAVE_PRECEDING_SPACE.getMessage());
